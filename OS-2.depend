@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1504472582 source:/home/alex/CLionProjects/OS-2/main.c
+	<stdio.h>
+	"mmemory.h"
+
+1504472700 /home/alex/CLionProjects/OS-2/mmemory.h
+
+1504472510 source:/home/alex/CLionProjects/OS-2/mmemory.c
+	<stdio.h>
+	"mmemory.h"
+	<stdbool.h>
+
