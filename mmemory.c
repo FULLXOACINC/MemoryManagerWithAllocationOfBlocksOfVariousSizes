@@ -2,46 +2,54 @@
 #include "mmemory.h"
 #include "memory_area.h"
 #include <stdbool.h>
+#include <stdlib.h>
 
 
+VA m_start;
+VA m_finish;
+memory_area *area_array;
+int area_array_size;
+int index=0;
 
-
-
-struct memory_area *memory_area=NULL;
 
 int _malloc (VA* ptr, size_t szBlock){
-    return 0;
+    if(index==0){
+        memory_area area;
+        area.va=&m_start[0];
+        *ptr=area.va;
+        area.size=szBlock;
+        area.is_free=false;
+        area_array[index]=area;
+        index++;
+    }
+    else{
+        for(int i=0;i<index;i++)
+            if(area_array[i].size>szBlock && area_array[i].is_free)
+                printf("d");
+    }
+
+    return SUCCESSFUL_CODE;
 }
 
 
 int __init (int n, int szPage){
-
-    if (memory_area !=NULL ) {
-        free_memory_area(memory_area);
-    }
     if (n <= 0 || szPage <= 0) {
         return INCORRECT_PARAMETERS_ERROR;
     }
 
-    memory_area=create_memory_area(n*szPage);
+    int init_size = szPage*n;
 
-    struct memory_area *test=create_memory_area(10);
+    m_start=(VA)malloc(init_size);
 
-    memory_area_push(memory_area,test);
+    m_finish=m_start+init_size;
 
-    struct memory_area *count=memory_area;
+    area_array_size=init_size>>5;
 
-    /*while(true){
-        printf("%i \n",count->size);
-        if(count->next_area!=NULL)
-            count=count->next_area;
-        else
-            break;
-    }*/
-    printf("%i \n",memory_area->size);
+    area_array=(memory_area*) malloc(area_array_size*sizeof(memory_area));
 
+    index=0;
 
-    return memory_area->size;
+    return SUCCESSFUL_CODE;
 }
 
 
