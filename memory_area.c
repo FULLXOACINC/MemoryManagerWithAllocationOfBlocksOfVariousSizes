@@ -38,31 +38,47 @@ int memory_area_push(struct memory_area *self,struct memory_area *new_area){
             }
             self=self->next_area;
         }
+
     if(!is_found)
         return NOT_ENOUGH_MEMORY_ERROR;
+
     struct memory_area *next_area= correct->next_area;
     struct memory_area *prev_area= correct->prev_area;
 
     struct memory_area *free_area= create_memory_area(correct->size-new_area->size);
 
-    if(prev_area!=NULL){
-        prev_area->next_area=new_area;
-    }
+
+
 
     if(next_area!=NULL){
-        if(free_area->size>0)
+        if(free_area->size>0){
             next_area->prev_area=free_area;
+            new_area->next_area=free_area;
+            free_area->prev_area=new_area;
+        }
         else
             next_area->prev_area=new_area;
     }
+    else{
+            new_area->next_area=free_area;
+            free_area->prev_area=new_area;
+    }
 
-    new_area->next_area=free_area;
-    free_area->prev_area=new_area;
+
+    if(prev_area!=NULL){
+        prev_area->next_area=new_area;
+    }
+    else
+        self=new_area;
+
 
     free(correct);
+    free(next_area);
+    free(prev_area);
+    free(free_area);
 
-///////////////////////
-    struct memory_area *count=new_area;
+   // printf("%i %i\n",self->size,self->next_area->size);
+    struct memory_area *count=self;
 
     while(true){
         printf("%i \n",count->size);
@@ -71,7 +87,7 @@ int memory_area_push(struct memory_area *self,struct memory_area *new_area){
         else
             break;
     }
-////////////////////////
+
 
 
     return SUCCESSFUL_CODE;

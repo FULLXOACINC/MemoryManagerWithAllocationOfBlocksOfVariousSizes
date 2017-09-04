@@ -5,13 +5,13 @@
 
 1504518385 /home/alex/CLionProjects/OS-2/mmemory.h
 
-1504525251 source:/home/alex/CLionProjects/OS-2/mmemory.c
+1504529452 source:/home/alex/CLionProjects/OS-2/mmemory.c
 	<stdio.h>
 	"mmemory.h"
 	"memory_area.h"
 	<stdbool.h>
 
-1504525520 source:/home/alex/CLionProjects/OS-2/memory_area.c
+1504529438 source:/home/alex/CLionProjects/OS-2/memory_area.c
 	"memory_area.h"
 	<stdlib.h>
 	<stdio.h>

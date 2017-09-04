@@ -29,6 +29,18 @@ int __init (int n, int szPage){
 
     memory_area_push(memory_area,test);
 
+    struct memory_area *count=memory_area;
+
+    /*while(true){
+        printf("%i \n",count->size);
+        if(count->next_area!=NULL)
+            count=count->next_area;
+        else
+            break;
+    }*/
+    printf("%i \n",memory_area->size);
+
+
     return memory_area->size;
 }
 
