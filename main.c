@@ -2,7 +2,6 @@
 #include "mmemory.h"
 
 int main() {
-    printf("Hello, World!\n");
-    printf("%s", isPowOfTwo(4) ? "true" : "false");
+    __init(2,23);
     return 5;
 }

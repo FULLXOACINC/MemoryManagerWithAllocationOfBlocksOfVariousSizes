@@ -1,4 +1,4 @@
-﻿
+﻿#include<stddef.h>
 typedef char* VA;				// Тип описывающий адрес блока
 
 
