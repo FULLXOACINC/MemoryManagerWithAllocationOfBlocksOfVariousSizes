@@ -95,7 +95,7 @@ int _free (VA ptr)
 
     for(int i=0; i<=index; i++)
     {
-        if(area_array[i].va==ptr)
+        if(area_array[i].va==ptr && !area_array[i].is_free)
         {
             area_array[i].is_free=true;
 
@@ -103,6 +103,10 @@ int _free (VA ptr)
             if(area_array[i-1].is_free && i>0){
                 area_array[i-1].size+=area_array[i].size;
                 combine_free_area_in_array_area(i);
+                if(area_array[i].is_free){
+                area_array[i-1].size+=area_array[i].size;
+                combine_free_area_in_array_area(i);
+            }
             }
             if(area_array[i+1].is_free){
                 area_array[i].size+=area_array[i+1].size;

@@ -18,8 +18,10 @@ int main() {
     _malloc(&area5,10);
 
     _free(area);
-    _free(area2);
     _free(area1);
-
+    _free(area2);
+    _free(area3);
+    _free(area4);
+    _free(area5);
     return 5;
 }
