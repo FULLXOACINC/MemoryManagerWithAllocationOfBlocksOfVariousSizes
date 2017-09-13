@@ -76,7 +76,7 @@ int _read (VA ptr, void* pBuffer, size_t szBuffer);
 	@retval	-2	доступ за пределы блока
 	@retval	1	неизвестная ошибка
  **/
-int _write (VA ptr, void* pBuffer, size_t szBuffer);
+int __write (VA ptr, void* pBuffer, size_t szBuffer);
 
 
 

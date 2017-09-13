@@ -1,16 +1,19 @@
 # depslib dependency file v1.0
-1505090629 source:/home/alex/CLionProjects/OS-2/main.c
+1505342743 source:/home/alex/CLionProjects/OS-2/main.c
 	<stdio.h>
+	<stdbool.h>
+	<assert.h>
 	"mmemory.h"
 
-1504552614 /home/alex/CLionProjects/OS-2/mmemory.h
+1505293685 /home/alex/CLionProjects/OS-2/mmemory.h
 
-1505089990 source:/home/alex/CLionProjects/OS-2/mmemory.c
+1505340955 source:/home/alex/CLionProjects/OS-2/mmemory.c
 	<stdio.h>
 	"mmemory.h"
 	"memory_area.h"
 	<stdbool.h>
 	<stdlib.h>
+	<string.h>
 
 1504556342 source:/home/alex/CLionProjects/OS-2/memory_area.c
 	"memory_area.h"
