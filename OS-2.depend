@@ -35,7 +35,7 @@
 
 1505293685 /home/alex/CProjects/OS-2/mmemory.h
 
-1505452168 source:/home/alex/CProjects/OS-2/mmemory.c
+1505482532 source:/home/alex/CProjects/OS-2/mmemory.c
 	<stdio.h>
 	"mmemory.h"
 	"memory_area.h"
@@ -43,9 +43,10 @@
 	<stdlib.h>
 	<string.h>
 
-1505452014 source:/home/alex/CProjects/OS-2/main.c
+1505482636 source:/home/alex/CProjects/OS-2/main.c
 	<stdio.h>
 	<stdbool.h>
 	<assert.h>
+	<stdlib.h>
 	"mmemory.h"
 

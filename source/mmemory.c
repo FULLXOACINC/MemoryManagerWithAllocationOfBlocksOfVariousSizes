@@ -10,10 +10,10 @@ VA m_start;
 memory_area *area_array;
 
 int array_size;
+int max_size;
 
 void add_free_area_to_array_area (int i,int free_area_size)
 {
-
     memory_area free_area;
     free_area.va=area_array[i].va+area_array[i].size;
     free_area.size=free_area_size;
@@ -26,6 +26,11 @@ void add_free_area_to_array_area (int i,int free_area_size)
     array_size++;
 
 }
+bool check_NULL_value(VA ptr, void* pBuffer)
+{
+    return pBuffer==NULL || ptr==NULL;
+}
+
 void print_array()
 {
     for (int c = 0; c <= array_size; c++)
@@ -41,15 +46,18 @@ void combine_free_area_in_array_area(int i)
 int __init (int n, int szPage)
 {
     if (n <= 0 || szPage <= 0)
-    {
         return INCORRECT_PARAMETERS_ERROR;
-    }
 
     int init_size = szPage*n;
 
     m_start=(VA)malloc(init_size);
 
     area_array=(memory_area*) malloc(init_size*sizeof(memory_area));
+
+    if (area_array == NULL)
+            return UNKNOWN_ERROR;
+
+    max_size=init_size;
 
     memory_area area;
 
@@ -65,6 +73,13 @@ int __init (int n, int szPage)
 int _malloc (VA* ptr, size_t szBlock)
 {
     bool area_is_find=false;
+
+    if (szBlock <= 0)
+        return INCORRECT_PARAMETERS_ERROR;
+
+    if(max_size==array_size || area_array == NULL)
+        return UNKNOWN_ERROR;
+
     for(int i=0; i<=array_size; i++)
     {
         if(area_array[i].size>=szBlock && area_array[i].is_free)
@@ -84,7 +99,6 @@ int _malloc (VA* ptr, size_t szBlock)
 
             }
 
-
             area_is_find=true;
 
             break;
@@ -99,6 +113,9 @@ int _malloc (VA* ptr, size_t szBlock)
 
 int _free (VA ptr)
 {
+    if(area_array == NULL)
+        return UNKNOWN_ERROR;
+
     bool area_is_find=false;
 
     for(int i=0; i<=array_size; i++)
@@ -141,14 +158,40 @@ int _free (VA ptr)
 
 int _write (VA ptr, void* pBuffer, size_t szBuffer)
 {
+    if(area_array == NULL)
+        return UNKNOWN_ERROR;
+    if(check_NULL_value(ptr,pBuffer) || szBuffer<=0)
+        return INCORRECT_PARAMETERS_ERROR;
+
+    bool is_va_find=false;
+    for(int i=0; i<array_size-1; i++)
+    {
+        if(ptr>=area_array[i].va && ptr<area_array[i+1].va)
+        {
+            if(area_array[i+1].va-ptr<szBuffer)
+                return OUT_OF_RANGE_ERROR;
+            is_va_find=true;
+        }
+
+
+    }
+    if(!is_va_find)
+        return INCORRECT_PARAMETERS_ERROR;
+
     memcpy(ptr,pBuffer,szBuffer);
-    return 0;
+    return SUCCESSFUL_CODE;
 }
 
 int _read (VA ptr, void* pBuffer, size_t szBuffer)
 {
+    if(area_array == NULL)
+        return UNKNOWN_ERROR;
+    if(check_NULL_value(ptr,pBuffer) || szBuffer<=0)
+        return INCORRECT_PARAMETERS_ERROR;
+
+
     memcpy(pBuffer,ptr,szBuffer);
-    return 0;
+    return SUCCESSFUL_CODE;
 }
 
 

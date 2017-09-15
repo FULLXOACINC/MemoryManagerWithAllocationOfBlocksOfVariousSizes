@@ -89,20 +89,23 @@ void read_write_tests()
     _malloc(&area,15);
     _malloc(&area1,15);
 
-    char *buffer = "xxbufferxx";
-    size_t buffer_size = 11;
+    char *buffer = "xxxbufferxxx";
+    char *buffer_end = "buffer";
+
+    size_t buffer_size = 13;
     int err =_write(area, buffer, buffer_size);
-    VA allocated_buffer = (char *) malloc(sizeof(char) * 7);
 
-    _read(area+2, allocated_buffer, 6);
+    err =_write(area+50, buffer, 20);
 
-    printf("%s\n",buffer);
-    printf("%s\n",allocated_buffer);
+    assert(equal(-1,err));
+
+    VA allocated_buffer = (char *) malloc(sizeof(char) * 6);
+
+    _read(area+3, allocated_buffer, 6);
+
+    assert(strcmp(&buffer_end,&allocated_buffer));
 
 
-
-    //printf("%i",check_equal_collection(buffer1, buffer1 + buffer_size-1,
-      //                            allocated_buffer, allocated_buffer + buffer_size));
     _free(area);
     _free(area1);
 
@@ -115,7 +118,7 @@ int main() {
     malloc_tests();
     free_tests();
     read_write_tests();
-    printf("tests complite\n");
+    printf("tests complete\n");
 
     return 0;
 }
