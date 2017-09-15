@@ -8,7 +8,6 @@
 
 VA m_start;
 memory_area *area_array;
-int area_array_size;
 
 int array_size;
 
@@ -53,10 +52,11 @@ int _malloc (VA* ptr, size_t szBlock)
             area.is_free=false;
             area_array[i]=area;
 
-            array_size++;
-
-            if(free_size)
+            if(free_size){
                 add_free_area_to_array_area(i,free_size);
+
+            }
+
 
             area_is_find=true;
 
@@ -81,7 +81,7 @@ void add_free_area_to_array_area (int i,int free_area_size)
         area_array[c+1] = area_array[c];
 
     area_array[i+1] = free_area;
-
+    array_size++;
 
 }
 
@@ -107,11 +107,12 @@ int _free (VA ptr)
                             combine_free_area_in_array_area(i);
                         }
                 }
-            if(area_array[i+1].is_free)
-            {
-                area_array[i].size+=area_array[i+1].size;
-                combine_free_area_in_array_area(i+1);
-            }
+            else
+                if(area_array[i+1].is_free)
+                {
+                    area_array[i].size+=area_array[i+1].size;
+                    combine_free_area_in_array_area(i+1);
+                }
 
             area_is_find=true;
             break;

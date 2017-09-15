@@ -56,6 +56,7 @@ void malloc_tests()
     _free(area1);
     _free(area2);
 
+
 }
 void free_tests()
 {
@@ -68,17 +69,16 @@ void free_tests()
     _malloc(&area1,10);
     _malloc(&area2,10);
 
+
     _free(area1);
     _free(area2);
+
 
     int err=_malloc(&area3,30);
     assert(equal(0, err));
 
-
     _free(area);
     _free(area3);
-
-
 }
 void read_write_tests()
 {
@@ -102,8 +102,9 @@ void read_write_tests()
 
     //printf("%i",check_equal_collection(buffer1, buffer1 + buffer_size-1,
       //                            allocated_buffer, allocated_buffer + buffer_size));
-    //_free(area);
-   // _free(area1);
+    _free(area);
+    _free(area1);
+
 
 }
 
