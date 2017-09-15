@@ -11,6 +11,33 @@ memory_area *area_array;
 
 int array_size;
 
+void add_free_area_to_array_area (int i,int free_area_size)
+{
+
+    memory_area free_area;
+    free_area.va=area_array[i].va+area_array[i].size;
+    free_area.size=free_area_size;
+    free_area.is_free=true;
+
+    for (int c = array_size; c >= i; c--)
+        area_array[c+1] = area_array[c];
+
+    area_array[i+1] = free_area;
+    array_size++;
+
+}
+void print_array()
+{
+    for (int c = 0; c <= array_size; c++)
+       printf("%i \n", area_array[c].size);
+}
+void combine_free_area_in_array_area(int i)
+{
+    for(int c = i; c <= array_size ; c++)
+        area_array[c] = area_array[c + 1];
+    array_size--;
+}
+
 int __init (int n, int szPage)
 {
     if (n <= 0 || szPage <= 0)
@@ -69,21 +96,6 @@ int _malloc (VA* ptr, size_t szBlock)
     return SUCCESSFUL_CODE;
 }
 
-void add_free_area_to_array_area (int i,int free_area_size)
-{
-
-    memory_area free_area;
-    free_area.va=area_array[i].va+area_array[i].size;
-    free_area.size=free_area_size;
-    free_area.is_free=true;
-
-    for (int c = array_size; c >= i; c--)
-        area_array[c+1] = area_array[c];
-
-    area_array[i+1] = free_area;
-    array_size++;
-
-}
 
 int _free (VA ptr)
 {
@@ -139,15 +151,6 @@ int _read (VA ptr, void* pBuffer, size_t szBuffer)
     return 0;
 }
 
-void combine_free_area_in_array_area(int i)
-{
-    for(int c = i; c <= array_size ; c++)
-        area_array[c] = area_array[c + 1];
-    array_size--;
-}
 
-void print_array()
-{
-    for (int c = 0; c <= array_size; c++)
-       printf("%i \n", area_array[c].size);
-}
+
+

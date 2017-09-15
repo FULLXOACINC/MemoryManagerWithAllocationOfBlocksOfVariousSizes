@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "mmemory.h"
 
 bool check_equal_collection(char *begin_l, char *end_l, char *begin_r, char *end_r)

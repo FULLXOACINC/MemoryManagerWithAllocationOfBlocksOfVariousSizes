@@ -2,14 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="memory_area.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="mmemory.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="842" topLine="17" />
+			<Cursor1 position="2261" topLine="64" />
 		</Cursor>
 	</File>
 	<File name="memory_area.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -17,19 +12,19 @@
 			<Cursor1 position="302" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="memory_area.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1380" topLine="88" />
+		</Cursor>
+	</File>
 	<File name="mmemory.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="65" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="15" />
-			<Collapse line="92" />
-			<Collapse line="146" />
-		</Folding>
-	</File>
-	<File name="mmemory.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2261" topLine="64" />
+			<Cursor1 position="951" topLine="47" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
