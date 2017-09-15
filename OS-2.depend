@@ -50,3 +50,23 @@
 	<stdlib.h>
 	"mmemory.h"
 
+1505506477 source:/home/alex/CProjects/OS-2/source/mmemory.c
+	"mmemory.h"
+	"memory_area.h"
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+
+1505483220 /home/alex/CProjects/OS-2/source/mmemory.h
+
+1505501715 /home/alex/CProjects/OS-2/source/memory_area.h
+	"mmemory.h"
+	<stdbool.h>
+
+1505503941 source:/home/alex/CProjects/OS-2/source/main.c
+	<stdio.h>
+	<stdbool.h>
+	<assert.h>
+	<stdlib.h>
+	"mmemory.h"
+

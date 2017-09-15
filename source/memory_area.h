@@ -1,5 +1,5 @@
-#ifndef MEMORY_AREA_H_INCLUDED
-#define MEMORY_AREA_H_INCLUDED
+#ifndef MEMORY_AREA_INCLUDED
+#define MEMORY_AREA_INCLUDED
 
 #include "mmemory.h"
 #include <stdbool.h>
@@ -17,4 +17,4 @@ bool is_free;
 } memory_area;
 
 
-#endif // MEMORY_AREA_H_INCLUDED
+#endif // MEMORY_AREA_INCLUDED

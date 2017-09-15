@@ -31,17 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="source/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="memory_area.c">
+		<Unit filename="source/memory_area.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="memory_area.h" />
-		<Unit filename="mmemory.c">
+		<Unit filename="source/memory_area.h" />
+		<Unit filename="source/mmemory.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="mmemory.h" />
+		<Unit filename="source/mmemory.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />

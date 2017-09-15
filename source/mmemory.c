@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "mmemory.h"
 #include "memory_area.h"
 #include <stdbool.h>
@@ -10,7 +9,6 @@ VA m_start;
 memory_area *area_array;
 
 int array_size;
-int max_size;
 
 void add_free_area_to_array_area (int i,int free_area_size)
 {
@@ -31,11 +29,6 @@ bool check_NULL_value(VA ptr, void* pBuffer)
     return pBuffer==NULL || ptr==NULL;
 }
 
-void print_array()
-{
-    for (int c = 0; c <= array_size; c++)
-       printf("%i \n", area_array[c].size);
-}
 void combine_free_area_in_array_area(int i)
 {
     for(int c = i; c <= array_size ; c++)
@@ -57,8 +50,6 @@ int __init (int n, int szPage)
     if (area_array == NULL)
             return UNKNOWN_ERROR;
 
-    max_size=init_size;
-
     memory_area area;
 
     area.va=m_start;
@@ -77,7 +68,7 @@ int _malloc (VA* ptr, size_t szBlock)
     if (szBlock <= 0)
         return INCORRECT_PARAMETERS_ERROR;
 
-    if(max_size==array_size || area_array == NULL)
+    if(area_array == NULL)
         return UNKNOWN_ERROR;
 
     for(int i=0; i<=array_size; i++)
@@ -156,7 +147,7 @@ int _free (VA ptr)
 
 }
 
-int _write (VA ptr, void* pBuffer, size_t szBuffer)
+int read_write_error(VA ptr, void* pBuffer,size_t szBuffer)
 {
     if(area_array == NULL)
         return UNKNOWN_ERROR;
@@ -164,11 +155,11 @@ int _write (VA ptr, void* pBuffer, size_t szBuffer)
         return INCORRECT_PARAMETERS_ERROR;
 
     bool is_va_find=false;
-    for(int i=0; i<array_size-1; i++)
+    for(int i=0; i<array_size; i++)
     {
-        if(ptr>=area_array[i].va && ptr<area_array[i+1].va)
+        if(ptr>=area_array[i].va && ptr<area_array[i].va+area_array[i].size)
         {
-            if(area_array[i+1].va-ptr<szBuffer)
+            if(area_array[i].va+area_array[i].size-ptr<szBuffer)
                 return OUT_OF_RANGE_ERROR;
             is_va_find=true;
         }
@@ -177,22 +168,42 @@ int _write (VA ptr, void* pBuffer, size_t szBuffer)
     }
     if(!is_va_find)
         return INCORRECT_PARAMETERS_ERROR;
-
-    memcpy(ptr,pBuffer,szBuffer);
     return SUCCESSFUL_CODE;
+}
+
+int _write (VA ptr, void* pBuffer, size_t szBuffer)
+{
+    switch(read_write_error(ptr,pBuffer,szBuffer)){
+    case -1:
+        return INCORRECT_PARAMETERS_ERROR;
+    case -2:
+        return OUT_OF_RANGE_ERROR;
+    case 1:
+        return UNKNOWN_ERROR;
+    case 0:
+        memcpy(ptr,pBuffer,szBuffer);
+        return SUCCESSFUL_CODE;
+    }
+
 }
 
 int _read (VA ptr, void* pBuffer, size_t szBuffer)
 {
-    if(area_array == NULL)
-        return UNKNOWN_ERROR;
-    if(check_NULL_value(ptr,pBuffer) || szBuffer<=0)
+    switch(read_write_error(ptr,pBuffer,szBuffer)){
+    case -1:
         return INCORRECT_PARAMETERS_ERROR;
+    case -2:
+        return OUT_OF_RANGE_ERROR;
+    case 1:
+        return UNKNOWN_ERROR;
+    case 0:
+        memcpy(pBuffer,ptr,szBuffer);
+        return SUCCESSFUL_CODE;
+    }
 
-
-    memcpy(pBuffer,ptr,szBuffer);
-    return SUCCESSFUL_CODE;
 }
+
+
 
 
 

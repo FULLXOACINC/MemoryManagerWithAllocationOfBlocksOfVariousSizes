@@ -4,20 +4,6 @@
 #include <stdlib.h>
 #include "mmemory.h"
 
-bool check_equal_collection(char *begin_l, char *end_l, char *begin_r, char *end_r)
-{
-    if (end_l - begin_l != end_r - begin_r) {
-        return false;
-    }
-    bool is_equal = true;
-    char *current_l, *current_r;
-    for (current_l = begin_l, current_r = begin_r;
-         current_l < end_l && current_r < end_r && is_equal; current_l++, current_r++) {
-        is_equal &= *current_l == *current_r;
-    }
-    return is_equal;
-}
-
 bool equal(size_t l, size_t r)
 {
     return l == r;
@@ -44,7 +30,7 @@ void malloc_tests()
     VA area1;
     VA area2;
 
-    int err=_malloc(&area,10);
+    int err=_malloc(&area,1);
     assert(equal(0, err));
 
     err=_malloc(&area1,20);
@@ -56,7 +42,6 @@ void malloc_tests()
     _free(area);
     _free(area1);
     _free(area2);
-
 
 }
 void free_tests()
@@ -80,6 +65,7 @@ void free_tests()
 
     _free(area);
     _free(area3);
+
 }
 void read_write_tests()
 {
@@ -95,29 +81,33 @@ void read_write_tests()
     size_t buffer_size = 13;
     int err =_write(area, buffer, buffer_size);
 
-    err =_write(area+50, buffer, 20);
+    err =_write(area1, buffer, 20);
+    assert(equal(-2,err));
 
+    err =_write(area+50, buffer, 20);
     assert(equal(-1,err));
 
-    VA allocated_buffer = (char *) malloc(sizeof(char) * 6);
+    buffer_size=6;
+    VA temp_buffer = (char *) malloc(sizeof(char) * buffer_size);
 
-    _read(area+3, allocated_buffer, 6);
+    err=_read(area+3, temp_buffer, buffer_size);
 
-    assert(strcmp(&buffer_end,&allocated_buffer));
-
+    assert(equal(0,err));
+    assert(strcmp(&buffer_end,&temp_buffer));
 
     _free(area);
     _free(area1);
-
 
 }
 
 
 int main() {
+
     init_tests();
     malloc_tests();
     free_tests();
     read_write_tests();
+
     printf("tests complete\n");
 
     return 0;
