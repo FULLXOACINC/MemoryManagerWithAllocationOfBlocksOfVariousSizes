@@ -34,9 +34,6 @@
 		<Unit filename="source/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source/memory_area.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="source/memory_area.h" />
 		<Unit filename="source/mmemory.c">
 			<Option compilerVar="CC" />

@@ -5,8 +5,8 @@
 #include <string.h>
 
 
-VA m_start;
 memory_area *area_array;
+VA m_start;
 
 int array_size;
 
@@ -38,6 +38,13 @@ void combine_free_area_in_array_area(int i)
 
 int __init (int n, int szPage)
 {
+	if(area_array!=NULL || m_start!=NULL)
+	{
+		free(area_array);
+		free(m_start);
+	}
+
+
     if (n <= 0 || szPage <= 0)
         return INCORRECT_PARAMETERS_ERROR;
 
@@ -65,7 +72,8 @@ int _malloc (VA* ptr, size_t szBlock)
 {
     bool area_is_find=false;
 
-    if (szBlock <= 0)
+
+    if (szBlock == 0)
         return INCORRECT_PARAMETERS_ERROR;
 
     if(area_array == NULL)
@@ -201,6 +209,17 @@ int _read (VA ptr, void* pBuffer, size_t szBuffer)
         return SUCCESSFUL_CODE;
     }
 
+}
+
+int get_array_size()
+{
+    return array_size;
+}
+
+void free_array()
+{
+    free(area_array);
+    area_array=NULL;
 }
 
 
