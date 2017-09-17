@@ -87,79 +87,262 @@ void malloc_not_exist_free_area()
 
 void free_unknown_error_test()
 {
-
+	__init(4,10);
+	VA area;
+	_malloc(&area,20);
+    free_array();
+    int err=_free(area);
+    assert(equal(1, err));
 }
 
 void free_incorrect_peremeters_error_test()
 {
-
+	__init(4,10);
+	VA area;
+    int err=_free(area);
+    assert(equal(-1, err));
 }
 
 void free_previous_area_not_free_next_area_not_free()
 {
-
+	__init(4,10);
+	VA area;
+	VA area1;
+	VA area2;
+	_malloc(&area,10);
+	_malloc(&area1,10);
+	_malloc(&area2,10);
+    int err=_free(area1);
+    assert(equal(0, err));
+    assert(equal(3, get_array_size()));
 }
 
-void free_incorrect_peremeters_error_test()
+void free_previous_area_free_next_area_not_free()
 {
+	__init(4,10);
+	VA area;
+	VA area1;
+	VA area2;
+
+	_malloc(&area,10);
+	_malloc(&area1,10);
+	_malloc(&area2,10);
+
+    int err=_free(area);
+    assert(equal(0, err));
+    err=_free(area1);
+    assert(equal(0, err));
+
+
+    assert(equal(2, get_array_size()));
+}
+
+void free_previous_area_not_free_next_area_free()
+{
+	__init(4,10);
+	VA area;
+	VA area1;
+	VA area2;
+
+	_malloc(&area,10);
+	_malloc(&area1,10);
+	_malloc(&area2,10);
+
+    int err=_free(area2);
+    assert(equal(0, err));
+
+
+    assert(equal(2, get_array_size()));
+}
+
+void free_previous_area_free_next_area_free()
+{
+	__init(4,10);
+	VA area;
+	VA area1;
+	VA area2;
+
+	_malloc(&area,10);
+	_malloc(&area1,10);
+	_malloc(&area2,10);
+
+    int err=_free(area2);
+    assert(equal(0, err));
+
+    err=_free(area1);
+    assert(equal(0, err));
+
+    assert(equal(1, get_array_size()));
+}
+
+void write_unknown_error_test()
+{
+	__init(4,10);
+	VA area;
+
+	_malloc(&area,10);
+	free_array();
+    char *buffer_end = "buffer";
+    size_t buffer_size = 7;
+
+    free_array();
+    int err =_write(area, buffer_end, buffer_size);
+    assert(equal(1, err));
 
 }
-// void free_tests()
-// {
-//     VA area;
-//     VA area1;
-//     VA area2;
-//     VA area3;
 
-//     _malloc(&area ,10);
-//     _malloc(&area1,10);
-//     _malloc(&area2,10);
+void write_incorrect_parameters_error_test()
+{
+	__init(4,10);
+	VA area;
 
+	_malloc(&area,10);
+    char *buffer = NULL;
+    size_t buffer_size = 7;
 
-//     _free(area1);
-//     _free(area2);
+    int err =_write(area, buffer, buffer_size);
+    assert(equal(-1, err));
 
+}
 
-//     int err=_malloc(&area3,30);
-//     assert(equal(0, err));
+void write_not_found_area_test()
+{
+	__init(4,10);
+    VA area;
 
-//     _free(area);
-//     _free(area3);
+    _malloc(&area,15);
 
-// }
-// void read_write_tests()
-// {
-//     VA area;
-//     VA area1;
-//     VA temp_buffer;
+    char *buffer = "buffer";
 
-//     _malloc(&area,15);
-//     _malloc(&area1,15);
+    size_t buffer_size = 7;
 
-//     char *buffer = "xxxbufferxxx";
-//     char *buffer_end = "buffer";
+    int err =_write(area+50, buffer, 10);
+    assert(equal(-1,err));
+}
 
-//     size_t buffer_size = 13;
-//     int err =_write(area, buffer, buffer_size);
+void write_out_of_range_error_test()
+{
+	__init(4,10);
+    VA area;
 
-//     err =_write(area1, buffer, 20);
-//     assert(equal(-2,err));
+    _malloc(&area,15);
 
-//     err =_write(area+50, buffer, 20);
-//     assert(equal(-1,err));
+    char *buffer = "buffer";
 
-//     buffer_size=6;
-//     temp_buffer = (char *) malloc(sizeof(char) * buffer_size);
+    size_t buffer_size = 7;
 
-//     err=_read(area+3, temp_buffer, buffer_size);
+    int err =_write(area, buffer, 20);
+    assert(equal(-2,err));
+}
 
-//     assert(equal(0,err));
-//     assert(strcmp(&buffer_end,&temp_buffer));
+void write_correct_test()
+{
+    __init(4,10);
+    VA area;
+    VA area1;
 
-//     _free(area);
-//     _free(area1);
+    _malloc(&area,15);
+    _malloc(&area1,15);
 
-// }
+    char *buffer = "xxxbufferxxx";
+    char *buffer_end = "buffer";
+
+    size_t buffer_size = 13;
+    int err =_write(area, buffer, buffer_size);
+	assert(equal(0,err));
+
+    buffer_size=7;
+    err =_write(area1+3, buffer_end, buffer_size);
+    assert(equal(0,err));
+
+}
+
+void read_unknown_error_test()
+{
+	__init(4,10);
+	VA area;
+
+	_malloc(&area,10);
+	free_array();
+    char *buffer_end = "buffer";
+    size_t buffer_size = 7;
+
+    free_array();
+
+    int err =_read(area, buffer_end, buffer_size);
+    assert(equal(1, err));
+}
+
+void read_incorrect_parameters_error_test()
+{
+	__init(4,10);
+	VA area;
+
+	_malloc(&area,10);
+    char *buffer = NULL;
+    size_t buffer_size = 7;
+
+    int err =_read(area, buffer, buffer_size);
+    assert(equal(-1, err));
+}
+
+void read_not_found_area_test()
+{
+	__init(4,10);
+    VA area;
+
+    _malloc(&area,15);
+
+    char *buffer= "buffer";
+
+    size_t buffer_size = 7;
+
+    int err =_read(area+50, buffer, 10);
+    assert(equal(-1,err));
+}
+
+void read_out_of_range_error_test()
+{
+	__init(4,10);
+    VA area;
+
+    _malloc(&area,15);
+
+    char *buffer = "buffer";
+
+    size_t buffer_size = 7;
+
+    int err =_read(area, buffer, 20);
+    assert(equal(-2,err));
+}
+
+void read_correct_test()
+{
+    __init(4,10);
+    VA area;
+    VA area1;
+    VA temp_buffer;
+
+    _malloc(&area,15);
+    _malloc(&area1,15);
+
+    char *buffer = "xxxbufferxxx";
+    char *buffer_end = "buffer";
+
+    size_t buffer_size = 13;
+    _write(area, buffer, buffer_size);
+
+    buffer_size=7;
+    _write(area1, buffer_end, buffer_size);
+    temp_buffer = (char *) malloc(sizeof(char) * buffer_size);
+    int err=_read(area1, temp_buffer, buffer_size);
+    assert(equal(0,err));
+
+    err=_read(area+3, temp_buffer, 6);
+    assert(equal(0,err));
+    assert(strcmp(&buffer_end,&temp_buffer));
+
+}
 
 void init_tests()
 {
@@ -187,21 +370,32 @@ void free_tests()
     free_previous_area_free_next_area_free();
 }
 
-void read_write_tests()
+void write_tests()
 {
-    // read_write_unknown_error_test();
-    // read_write_incorrect_peremeters_error_test();
-    // read_write_not_found_area_test();
-    // read_write_out_of_range_error_test();
-    // read_write_correct_test();
+    write_unknown_error_test();
+    write_incorrect_parameters_error_test();
+    write_not_found_area_test();
+    write_out_of_range_error_test();
+    write_correct_test();
 }
+
+void read_tests()
+{
+    read_unknown_error_test();
+    read_incorrect_parameters_error_test();
+    read_not_found_area_test();
+    read_out_of_range_error_test();
+    read_correct_test();
+}
+
 
 int main() {
 
     init_tests();
     malloc_tests();
     free_tests();
-    read_write_tests();
+    write_tests();
+    read_tests();
 
     printf("tests complete \n");
 
