@@ -398,10 +398,10 @@ int main() {
     write_tests();
     read_tests();
 
-    printf("tests complete \n");
-
-    //defragmentation_test();
+    defragmentation_test();
     defragmentation_test_random();
+
+    printf("tests complete \n");
 
     return 0;
 }
