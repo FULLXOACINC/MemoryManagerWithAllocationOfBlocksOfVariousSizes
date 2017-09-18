@@ -237,7 +237,6 @@ int count_free_area()
     for(int i=0; i<=array_size; i++)
         if(area_array[i].is_free)
         {
-            //printf("%i\n",area_array[i].size);
             count+=area_array[i].size;
         }
 
