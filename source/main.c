@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "mmemory.h"
 
+
 bool equal(size_t l, size_t r)
 {
     return l == r;
@@ -398,6 +399,9 @@ int main() {
     read_tests();
 
     printf("tests complete \n");
+
+    //defragmentation_test();
+    defragmentation_test_random();
 
     return 0;
 }

@@ -5,6 +5,7 @@
 #include <string.h>
 
 
+
 memory_area *area_array;
 VA m_start;
 
@@ -211,6 +212,14 @@ int _read (VA ptr, void* pBuffer, size_t szBuffer)
 
 }
 
+
+
+
+
+
+
+
+
 int get_array_size()
 {
     return array_size;
@@ -220,6 +229,33 @@ void free_array()
 {
     free(area_array);
     area_array=NULL;
+}
+
+int count_free_area()
+{
+    int count=0;
+    for(int i=0; i<=array_size; i++)
+        if(area_array[i].is_free)
+        {
+            //printf("%i\n",area_array[i].size);
+            count+=area_array[i].size;
+        }
+
+    return count;
+}
+
+int max_free_area()
+{
+    int max=0;
+
+    for(int i=0; i<=array_size; i++)
+        if(area_array[i].size>max && area_array[i].is_free)
+        {
+
+            max=area_array[i].size;
+        }
+
+    return max;
 }
 
 

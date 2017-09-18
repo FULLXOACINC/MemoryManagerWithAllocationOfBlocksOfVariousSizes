@@ -50,7 +50,7 @@
 	<stdlib.h>
 	"mmemory.h"
 
-1505670084 source:/home/alex/CProjects/OS-2/source/mmemory.c
+1505690260 source:/home/alex/CProjects/OS-2/source/mmemory.c
 	"mmemory.h"
 	"memory_area.h"
 	<stdbool.h>
@@ -63,10 +63,21 @@
 	"mmemory.h"
 	<stdbool.h>
 
-1505669532 source:/home/alex/CProjects/OS-2/source/main.c
+1505686341 source:/home/alex/CProjects/OS-2/source/main.c
 	<stdio.h>
 	<stdbool.h>
 	<assert.h>
 	<stdlib.h>
 	"mmemory.h"
+
+1505693522 source:/home/alex/CProjects/OS-2/source/defragmentation_tests.c
+	"mmemory.h"
+	"memory_area.h"
+	<stdlib.h>
+	<stdio.h>
+
+1505679292 /home/alex/CProjects/OS-2/source/defragmentation_tests.c
+	"mmemory.h"
+	"memory_area.h"
+	<stdlib.h>
 
