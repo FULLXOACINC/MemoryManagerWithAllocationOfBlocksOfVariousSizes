@@ -16,5 +16,12 @@ size_t size;
 bool is_free;
 } memory_area;
 
+memory_area *area_array;
+VA m_start;
+
+int array_size;
+int max_free_area();
+int count_free_area();
+int get_array_size();
 
 #endif // MEMORY_AREA_INCLUDED

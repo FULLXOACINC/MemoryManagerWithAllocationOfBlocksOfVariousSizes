@@ -12,37 +12,34 @@ void combine(int i)
     size--;
 }
 
-void  defragmentation_test()
+void  defragmentation_test(int block_size)
 {
     FILE *fp;
 
     fp = fopen("res_static.txt", "w+");
 
-    int err;
-    size=40;
+    size=block_size;
     __init(10,size);
     array=(VA*) malloc(size*sizeof(VA));
 
     for(int i=0;i<size;i++){
-        err=_malloc(&array[i],10);
+        _malloc(&array[i],10);
     }
 
     for(int i=0;i<size;i+=2){
         _free(array[i]);
         fprintf(fp, "%i %i\n",max_free_area(),count_free_area());
-
     }
 
 }
 
-void  defragmentation_test_random()
+void  defragmentation_test_random(int block_size)
 {
     FILE *fp;
 
     fp = fopen("res.txt", "w+");
 
-    int err;
-    size=100;
+    size=block_size;
     int temp_size=size;
     int current;
 
@@ -51,7 +48,7 @@ void  defragmentation_test_random()
 
     for(int i=0;i<temp_size;i++)
     {
-        err=_malloc(&array[i],10);
+        _malloc(&array[i],10);
     }
 
     for(int i=0;i<temp_size;i++)

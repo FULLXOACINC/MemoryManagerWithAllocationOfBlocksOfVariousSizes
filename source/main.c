@@ -1,11 +1,14 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 #include "mmemory.h"
+#include "memory_area.h"
+#include "defragmentation_tests.h"
 
 
-bool equal(size_t l, size_t r)
+
+int equal(size_t l, size_t r)
 {
     return l == r;
 }
@@ -59,15 +62,6 @@ void malloc_not_enough_memory_error_test()
 
 }
 
-void malloc_unknown_error_test()
-{
-	__init(4,10);
-	VA area;
-	free_array();
-	int err=_malloc(&area,20);
-    assert(equal(1, err));
-}
-
 void malloc_exist_free_area()
 {
 	__init(4,10);
@@ -86,22 +80,13 @@ void malloc_not_exist_free_area()
     assert(equal(0, get_array_size()));
 }
 
-void free_unknown_error_test()
-{
-	__init(4,10);
-	VA area;
-	_malloc(&area,20);
-    free_array();
-    int err=_free(area);
-    assert(equal(1, err));
-}
-
 void free_incorrect_peremeters_error_test()
 {
 	__init(4,10);
-	VA area;
+	VA area=(VA)malloc(12);
     int err=_free(area);
     assert(equal(-1, err));
+
 }
 
 void free_previous_area_not_free_next_area_not_free()
@@ -176,22 +161,6 @@ void free_previous_area_free_next_area_free()
     assert(equal(1, get_array_size()));
 }
 
-void write_unknown_error_test()
-{
-	__init(4,10);
-	VA area;
-
-	_malloc(&area,10);
-	free_array();
-    char *buffer_end = "buffer";
-    size_t buffer_size = 7;
-
-    free_array();
-    int err =_write(area, buffer_end, buffer_size);
-    assert(equal(1, err));
-
-}
-
 void write_incorrect_parameters_error_test()
 {
 	__init(4,10);
@@ -215,8 +184,6 @@ void write_not_found_area_test()
 
     char *buffer = "buffer";
 
-    size_t buffer_size = 7;
-
     int err =_write(area+50, buffer, 10);
     assert(equal(-1,err));
 }
@@ -229,8 +196,6 @@ void write_out_of_range_error_test()
     _malloc(&area,15);
 
     char *buffer = "buffer";
-
-    size_t buffer_size = 7;
 
     int err =_write(area, buffer, 20);
     assert(equal(-2,err));
@@ -258,22 +223,6 @@ void write_correct_test()
 
 }
 
-void read_unknown_error_test()
-{
-	__init(4,10);
-	VA area;
-
-	_malloc(&area,10);
-	free_array();
-    char *buffer_end = "buffer";
-    size_t buffer_size = 7;
-
-    free_array();
-
-    int err =_read(area, buffer_end, buffer_size);
-    assert(equal(1, err));
-}
-
 void read_incorrect_parameters_error_test()
 {
 	__init(4,10);
@@ -296,8 +245,6 @@ void read_not_found_area_test()
 
     char *buffer= "buffer";
 
-    size_t buffer_size = 7;
-
     int err =_read(area+50, buffer, 10);
     assert(equal(-1,err));
 }
@@ -310,8 +257,6 @@ void read_out_of_range_error_test()
     _malloc(&area,15);
 
     char *buffer = "buffer";
-
-    size_t buffer_size = 7;
 
     int err =_read(area, buffer, 20);
     assert(equal(-2,err));
@@ -341,7 +286,7 @@ void read_correct_test()
 
     err=_read(area+3, temp_buffer, 6);
     assert(equal(0,err));
-    assert(strcmp(&buffer_end,&temp_buffer));
+    assert(memcmp(&buffer_end,&temp_buffer,6));
 
 }
 
@@ -356,14 +301,12 @@ void malloc_tests()
 {
     malloc_incorrect_peremeters_error_test();
     malloc_not_enough_memory_error_test();
-    malloc_unknown_error_test();
     malloc_exist_free_area();
     malloc_not_exist_free_area();
 }
 
 void free_tests()
 {
-    free_unknown_error_test();
     free_incorrect_peremeters_error_test();
     free_previous_area_not_free_next_area_not_free();
     free_previous_area_free_next_area_not_free();
@@ -373,7 +316,6 @@ void free_tests()
 
 void write_tests()
 {
-    write_unknown_error_test();
     write_incorrect_parameters_error_test();
     write_not_found_area_test();
     write_out_of_range_error_test();
@@ -382,7 +324,6 @@ void write_tests()
 
 void read_tests()
 {
-    read_unknown_error_test();
     read_incorrect_parameters_error_test();
     read_not_found_area_test();
     read_out_of_range_error_test();
@@ -398,8 +339,8 @@ int main() {
     write_tests();
     read_tests();
 
-    defragmentation_test();
-    defragmentation_test_random();
+    defragmentation_test(10);
+    defragmentation_test_random(50);
 
     printf("tests complete \n");
 

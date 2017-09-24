@@ -34,6 +34,7 @@
 		<Unit filename="source/defragmentation_tests.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="source/defragmentation_tests.h" />
 		<Unit filename="source/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
