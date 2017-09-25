@@ -1,6 +1,7 @@
 #ifndef DEFRAGMENTATION_TESTS_H_INCLUDED
 #define DEFRAGMENTATION_TESTS_H_INCLUDED
-
+#include "mmemory.h"
+#include "memory_area.h"
 VA *array;
 int size;
 

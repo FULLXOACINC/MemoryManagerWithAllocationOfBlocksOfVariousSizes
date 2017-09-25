@@ -50,7 +50,7 @@
 	<stdlib.h>
 	"mmemory.h"
 
-1506254024 source:/home/alex/CProjects/OS-2/source/mmemory.c
+1506255189 source:/home/alex/CProjects/OS-2/source/mmemory.c
 	"mmemory.h"
 	"memory_area.h"
 	<stdlib.h>
@@ -62,14 +62,14 @@
 	"mmemory.h"
 	<stdbool.h>
 
-1506254170 source:/home/alex/CProjects/OS-2/source/main.c
+1506326081 source:/home/alex/CProjects/OS-2/source/main.c
 	<stdio.h>
-	<assert.h>
-	<stdlib.h>
-	<string.h>
-	"mmemory.h"
-	"memory_area.h"
 	"defragmentation_tests.h"
+	"init_tests.h"
+	"malloc_tests.h"
+	"free_tests.h"
+	"write_tests.h"
+	"read_tests.h"
 
 1505801304 source:/home/alex/CProjects/OS-2/source/defragmentation_tests.c
 	"mmemory.h"
@@ -82,9 +82,98 @@
 	"memory_area.h"
 	<stdlib.h>
 
-1505801222 /home/alex/CProjects/OS-2/source/defragmentation_tests.h
+1506326072 /home/alex/CProjects/OS-2/source/defragmentation_tests.h
+	"mmemory.h"
+	"memory_area.h"
 
 1506253989 source:/home/alex/CProjects/OS-2/source/memory_area.c
 	"memory_area.h"
 	<stdlib.h>
+
+1506326338 source:/home/alex/CProjects/OS-2/source/free_tests.c
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	"mmemory.h"
+	"memory_area.h"
+	"free_tests.h"
+
+1506325006 /home/alex/CProjects/OS-2/source/init_tests.c
+	<assert.h>
+	"mmemory.h"
+	"memory_area.h"
+
+1506325223 /home/alex/CProjects/OS-2/source/malloc_tests.c
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h>
+	"mmemory.h"
+	"memory_area.h"
+	"defragmentation_tests.h"
+
+1506325417 /home/alex/CProjects/OS-2/source/free_tests.c
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h>
+	"mmemory.h"
+	"memory_area.h"
+	"defragmentation_tests.h"
+
+1506325639 /home/alex/CProjects/OS-2/source/write_tests.c
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h>
+	"mmemory.h"
+	"memory_area.h"
+	"defragmentation_tests.h"
+
+1506324345 /home/alex/CProjects/OS-2/source/read_tests.c
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h>
+	"mmemory.h"
+	"memory_area.h"
+	"defragmentation_tests.h"
+
+1506326325 source:/home/alex/CProjects/OS-2/source/malloc_tests.c
+	<assert.h>
+	"mmemory.h"
+	"memory_area.h"
+	"malloc_tests.h"
+
+1506326392 source:/home/alex/CProjects/OS-2/source/read_tests.c
+	<assert.h>
+	<stdlib.h>
+	<string.h>
+	"mmemory.h"
+	"memory_area.h"
+
+1506325866 source:/home/alex/CProjects/OS-2/source/write_tests.c
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h>
+	"mmemory.h"
+	"memory_area.h"
+	"defragmentation_tests.h"
+	"write_tests.h"
+
+1506326166 source:/home/alex/CProjects/OS-2/source/init_tests.c
+	<assert.h>
+	"mmemory.h"
+	"init_tests.h"
+
+1506325454 /home/alex/CProjects/OS-2/source/init_tests.h
+
+1506326125 /home/alex/CProjects/OS-2/source/free_tests.h
+
+1506326105 /home/alex/CProjects/OS-2/source/malloc_tests.h
+
+1506325720 /home/alex/CProjects/OS-2/source/write_tests.h
+
+1506325931 /home/alex/CProjects/OS-2/source/read_tests.h
 
